@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nwtk"
+version = "0.1"
+description = 'a Python package containing some useful utilities for network analysis and visualization.'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "zhoumingwu", email = "wu.zhoum@northeastern.edu" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "networkx>=3.0",
+  "numpy>=1.26.0",
+  "requests>=2.25.0",
+  "beautifulsoup4>=4.9.0"
+]
+
+[project.urls]
+Documentation = "https://github.com/zhoumingwu/nwtk#readme"
+Issues = "https://github.com/zhoumingwu/nwtk/issues"
+Source = "https://github.com/zhoumingwu/nwtk"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/nwtk tests}"
+
+[tool.coverage.run]
+source_pkgs = ["nwtk", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/nwtk/__about__.py",
+]
+
+[tool.coverage.paths]
+nwtk = ["src/nwtk", "*/nwtk/src/nwtk"]
+tests = ["tests", "*/nwtk/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
